@@ -21,7 +21,11 @@ public class Employee {
 
 	private String name;
 
+	// N+1問題対応(https://nakazye.hatenablog.com/entry/2016/03/20/005738)
+	// TODO: もっと簡単なのがあるかも
+    //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    //@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne
-	private Department departdent;
+	private Department department;
 
 }

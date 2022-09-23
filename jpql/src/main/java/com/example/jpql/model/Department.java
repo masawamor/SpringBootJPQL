@@ -8,10 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.Data;
 
 @Data
@@ -24,10 +20,9 @@ public class Department {
 
 	private String name;
 
-	// N+1問題対応(https://nakazye.hatenablog.com/entry/2016/03/20/005738)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id") // このアノテーションを追加
-    @JsonIdentityReference(alwaysAsId = true)
-	@OneToMany(mappedBy = "employees")
-	private List<Employee> employees;
+	// 一対多のテーブルを指定。
+	//マップする対象フィールドをmappedByで指定する
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
 
 }
