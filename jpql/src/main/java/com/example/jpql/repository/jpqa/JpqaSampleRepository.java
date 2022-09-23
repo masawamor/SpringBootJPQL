@@ -2,22 +2,27 @@ package com.example.jpql.repository.jpqa;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.jpql.model.Employee;
+import com.example.jpql.data.DepartmentJoinEmployee;
 
 @Repository
-public class JpqaSampleRepository {
+public interface JpqaSampleRepository extends JpaRepository<DepartmentJoinEmployee, Long> {
 
-	@PersistenceContext
-	EntityManager em;
-
-	public List<Employee> getAllEmployee() {
-		String query = "SELECT e FROM Employee e";
-		return em.createQuery(query, Employee.class).getResultList();
-	}
+	@Query(value =
+			"SELECT "
+			+ "  e.id as emp_id "
+			+ ", e.name as emp_name "
+			+ ", d.name as dep_name "
+			+ "FROM "
+			+ "Department d "
+			+ "JOIN "
+			+ "Employee e "
+			+ "ON "
+			+ "d.id = e.department_id",
+			nativeQuery = true)
+	List<DepartmentJoinEmployee> find();
 
 }

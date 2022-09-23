@@ -36,7 +36,7 @@ public class DataLoader implements ApplicationRunner {
 
 		var employee2 = new Employee();
 		employee2.setName("Cristiano Ronald");
-		employee2.setDepartment(department1);
+		employee2.setDepartment(department2);
 		employeeRepository.save(employee2);
 	}
 }
