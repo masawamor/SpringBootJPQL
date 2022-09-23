@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.jpql.model.Employee;
 import com.example.jpql.repository.DepartmentRepository;
 import com.example.jpql.repository.EmployeeRepository;
+import com.example.jpql.repository.jpqa.JpqaSampleRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,7 @@ public class JpqaSampleController {
 
 	private final EmployeeRepository employRepository;
 	private final DepartmentRepository departmentRepository;
+	private final JpqaSampleRepository jpqaRepository;
 
 	@GetMapping("/hello")
 	public String hello() {
@@ -26,5 +28,10 @@ public class JpqaSampleController {
 	@GetMapping("/employees")
 	public List<Employee> getAllEmployees() {
 		return employRepository.findAll();
+	}
+
+	@GetMapping("/employeesByJpqa")
+	public List<Employee> getAllEmployeesByJpqa() {
+		return jpqaRepository.getAllEmployee();
 	}
 }
